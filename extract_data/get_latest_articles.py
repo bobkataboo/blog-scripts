@@ -3,11 +3,11 @@ import asyncio
 import json
 from bs4 import BeautifulSoup
 
-url = 'https://biopedia.bg/latest/1'
-pages = 13
+url = 'https://fitnessmania.bg/latest/1'
+pages = 8
 
 async def make_api_call(i):
-    response = requests.get(f"https://biopedia.bg/latest/{i}")
+    response = requests.get(f"https://bulgarianbeauty.bg/latest/{i}")
     return response
 
 async def get_latest_articles():
@@ -38,13 +38,17 @@ async def get_latest_articles():
             print(f'Request for page {i} failed with status code {response.status_code}')
     slug_array = []
     # print('len' + len(articles))
-    for article in articles:
-        # slug_array += article.get('attributes').get('slug')
-        slug_array.extend([f"'{article.get('attributes').get('slug')}'"])
-        print(article.get('attributes').get('slug'))
-    print(slug_array)
-    # print(", ".join(slug_array))
     with open(f'latest_article_slugs.py', 'w') as file:
-        fml = ", ".join(slug_array)
-        file.write(f"data = [{fml}]")
+        for article in articles:
+            # slug_array += article.get('attributes').get('slug')
+            slug = article.get('attributes').get('slug')
+            slug_array.extend([f"'{slug}'"])
+            file.writelines(f"""
+{slug}""")
+            print(slug)
+        print(slug_array)
+    # print(", ".join(slug_array))
+    # with open(f'latest_article_slugs.py', 'w') as file:
+    #     fml = ", ".join(slug_array)
+    #     file.write(f"data = [{fml}]")
     return slug_array
