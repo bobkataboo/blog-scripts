@@ -5,7 +5,7 @@ import asyncio
 
 async def main():
     print('bo')
-    await get_articles()
+    # await get_articles()
     # await get_articles_clean_slug()
     # article_slugs = await get_latest_articles()
 
