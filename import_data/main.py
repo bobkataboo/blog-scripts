@@ -87,7 +87,7 @@ async def main():
             try:
                 file_object =  eval((f.read().replace('const data = ', '')))
                 article = prepare_article(file_object.get('attributes'))
-                article['id'] = file_object.get('id')
+                # article['id'] = file_object.get('id')
                 # print(article)
                 articles.append(article)
                 # if (index < 3):
